@@ -1,0 +1,13 @@
+services:
+    jellyseerr:
+       network_mode: 'host'
+       image: fallenbagel/jellyseerr:latest
+       container_name: jellyseerr
+       environment:
+            - LOG_LEVEL=debug
+            - TZ=CT
+       ports:
+            - 5055:5055
+       volumes:
+            - ~/docker/jellyseer/config:/app/config # This might require tweaking, alt path: /home/$USER/docker/jellyseer/config:/app/config
+       restart: unless-stopped
