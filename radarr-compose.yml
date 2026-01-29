@@ -1,0 +1,21 @@
+---
+services:
+  sonarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    networks:
+      - gluetun_network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/seth/docker/radarr/data:/config
+      - /mnt/hdd1/data:/data
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+networks:
+  gluetun_network:
+    name: gluetun_network
+    external: true
