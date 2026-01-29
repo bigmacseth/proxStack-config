@@ -1,0 +1,85 @@
+{
+        admin 0.0.0.0:2019
+        metrics {
+                per_host
+        }
+}
+
+jellyfin.big-mac.net {
+        reverse_proxy http://172.0.0.56:8096
+        log {
+                output file /var/log/caddy/jellyfin-access.log
+        }
+        tls bigmacseth@gmail.com
+}
+
+requests.big-mac.net {
+        reverse_proxy http://172.0.0.53:5055
+        log {
+                output file /var/log/caddy/request-access.log
+        }
+        tls bigmacseth@gmail.com
+}
+
+#authelia.big-mac.net {
+#        reverse_proxy http://authelia:9091
+#        tls bigmacseth@gmail.com
+#}
+
+#code.big-mac.net {
+#        forward_auth http://authelia:9091 {
+#                uri /api/authz/forward-auth
+#                copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+#         }
+#
+#        log {
+#                output file /var/log/caddy/request-access.log
+#        }
+#
+#        tls bigmacseth@gmail.com
+#
+#        reverse_proxy http://172.0.0.4:8443
+#}
+
+#cloud.big-mac.net {
+#        log {
+#                output file /var/log/caddy/request-access-cloud.log
+#        }
+#
+#        tls bigmacseth@gmail.com
+#
+#        reverse_proxy http://172.0.0.4:11000
+#}
+
+#big-mac.net {
+#        tls bigmacseth@gmail.com
+#        root * /home/bigmacseth/mainpcshare/CodeShit/web-dev/resume-site/build
+#        encode gzip
+#        file_server
+#}
+
+#chat.big-mac.net {
+#        reverse_proxy http://172.0.0.4:1222
+#        tls bigmacseth@gmail.com
+#}
+
+#wordpress.big-mac.net {
+#        tls bigmacseth@gmail.com
+#        log {
+#                output file /var/log/caddy/wordpress.big-mac
+#                format console
+#        }
+
+#        root * /srv/www/wordpress
+#        encode gzip
+#        file_server
+#        php_fastcgi unix//run/php/php-fpm.sock
+
+#        @disallowed {
+#                path /xmlrpc.php
+#                path *.sql
+#                path /wp-content/uploads/*.php
+#        }
+
+#        rewrite @disallowed '/index.php'
+#}
