@@ -1,0 +1,20 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    networks:
+      - gluetun_network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/seth/docker/prowlarr:/config
+      - /mnt/hdd1/data:/data
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+networks:
+  gluetun_network:
+    name: gluetun_network
+    external: true
