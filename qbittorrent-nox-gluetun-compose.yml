@@ -1,0 +1,57 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    networks: 
+      - gluetun_network
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=wireguard # or wireguard
+      - WIREGUARD_PRIVATE_KEY= (in important info)
+      - SERVER_COUNTRIES=United States
+    ports:
+      - 6881:6881/tcp
+      - 6881:6881/udp
+      - ${QBT_WEBUI_PORT}:${QBT_WEBUI_PORT}/tcp
+    devices:
+      - /dev/net/tun:/dev/net/tun
+  qbittorrent-nox:
+    # for debugging
+    #cap_add:
+      #- SYS_PTRACE
+    container_name: qbittorrent-nox
+    environment:
+      #- PAGID=10000
+      - PGID=1000
+      - PUID=1000
+      - QBT_EULA=${QBT_EULA}
+      - QBT_VERSION=${QBT_VERSION}
+      - QBT_WEBUI_PORT=${QBT_WEBUI_PORT}
+      #- TZ=UTC
+      #- UMASK=022
+    image: qbittorrentofficial/qbittorrent-nox:${QBT_VERSION}
+    network_mode: "service:gluetun"
+    read_only: true
+    stop_grace_period: 30m
+    tmpfs:
+      - /tmp
+    tty: true
+    volumes:
+      - ${QBT_CONFIG_PATH}:/config
+      - ${QBT_DOWNLOADS_PATH}:/downloads
+    restart: unless-stopped
+networks:
+  gluetun_network:
+    name: gluetun_network
+    external: true
+
+
+# This is the contents of the .env file for qbittorrent
+# QBT_EULA=accept
+# QBT_VERSION=latest
+# QBT_WEBUI_PORT=8080
+
+# QBT_CONFIG_PATH=/home/seth/docker/docker-qbittorrent-nox/config
+# QBT_DOWNLOADS_PATH=/mnt/hdd1/data/data/torrents:/data/torrents
