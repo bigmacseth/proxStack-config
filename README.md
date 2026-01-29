@@ -1,2 +1,2 @@
-# caddy-config
-Steps for and files for a Caddy service.
+# proxStack-config
+Steps for and files for the proxStack cluster.
