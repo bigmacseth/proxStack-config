@@ -1,0 +1,21 @@
+---
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    networks:
+      - gluetun_network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /home/seth/docker/data:/config
+      - /mnt/hdd1/data:/data
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+networks:
+  gluetun_network:
+    name: gluetun_network
+    external: true
