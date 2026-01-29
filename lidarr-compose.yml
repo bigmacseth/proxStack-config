@@ -10,7 +10,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /home/seth/docker/lidarr/data:/config
-      - /mnt/hdd1/data/data:/data
+      - /mnt/hdd1/data:/data
     ports:
       - 8686:8686
     restart: unless-stopped
