@@ -7,3 +7,5 @@ services:
     ports:
       - "9090:9090"
     restart: unless-stopped
+
+# you will need to put the file 'prometheus.yml' from this repo into a directory:  /home/USER/prometheus/prometheus/prometheus.yml
