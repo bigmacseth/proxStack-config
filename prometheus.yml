@@ -1,0 +1,25 @@
+scrape_configs:
+  - job_name: caddy
+    static_configs:
+      - targets: ['172.0.0.57:2019']
+  
+  - job_name: proxmox
+    metrics_path: /pve
+    static_configs:
+      - targets:
+        - 172.0.0.3
+        - 172.0.0.52
+        - 172.0.0.55
+    params:
+      module: [default]
+      cluster: ['1']
+      node: ['1']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      
+      - source_labels: [__param_target]
+        target_label: instance
+      
+      - target_label: __address__
+        replacement: 172.0.0.51:9221
