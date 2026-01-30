@@ -1,42 +1,75 @@
 # proxStack-config
-Steps for and files for the proxStack cluster.
 
-1.) Create an lxc container for each: caddy, upsnap, rustdesk, twingate, and pihole
-2.) Caddy instructions:
-    a. Use this script to install caddy onto the container:
-        sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
-        curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-        curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-        chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-        chmod o+r /etc/apt/sources.list.d/caddy-stable.list
-        sudo apt update
-        sudo apt install caddy
-    b. Copy the caddyfile and caddy_exporter directory into the lxc
-    c. As root, execute the command ‘caddy run’ as a test
-    d. Test connectivity by going to the domain jellyfin.big-mac.net
-    e. Done!
+Configuration steps and files for the proxStack cluster.
 
-3.) upsnap instructions:
-    a. install docker, create directory 'upsnap'.
-    b. copy the upsnap-compose.yml into the directory
-    c. run 'docker compose up -d'
-    d. configure upsnap in the Web GUI to point to Main-PC
+## Container Setup
 
-4.) rustdesk instructions:
-    a. install docker, create directory 'rustdesk'
-    b. copy the rustdesk-compose.yml file into the directory
-    c. run 'docker compose up -d'
-    d. point Main-PC to rustdesk in the client
-    e. keys are in Important Info
+Create an LXC container for each service:
+- Caddy
+- UpSnap
+- RustDesk
+- Twingate
+- Pi-hole
 
-5.) twingate instructions:
-    a. follow instructions in this webpage: https://www.twingate.com/docs/proxmox-container-deployment
-    b. go to twingate dashboard and create a connector pointed at the lxc
-    c. deploy and complete
+---
 
-6.) pihole instructions: 
-    a. create lxc with static IP
-    b. use this command to interactively install pihole:  curl -sSL https://install.pi-hole.net | bash
-    c. go to web ui and configure there
+## Service Deployment Instructions
 
-7.) Create a VM for each of the other docker hosts: 
+### 1. Caddy
+
+**Install Caddy:**
+```bash
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+```
+
+**Configure:**
+1. Copy the `Caddyfile` and `caddy_exporter` directory into the LXC
+2. As root, test with: `caddy run`
+3. Verify connectivity at: `jellyfin.big-mac.net`
+
+---
+
+### 2. UpSnap
+
+1. Install Docker and create directory: `upsnap`
+2. Copy `upsnap-compose.yml` into the directory
+3. Run: `docker compose up -d`
+4. Configure UpSnap in Web GUI to point to Main-PC
+
+---
+
+### 3. RustDesk
+
+1. Install Docker and create directory: `rustdesk`
+2. Copy `rustdesk-compose.yml` into the directory
+3. Run: `docker compose up -d`
+4. Point Main-PC to RustDesk in the client
+5. Keys are stored in Important Info
+
+---
+
+### 4. Twingate
+
+1. Follow deployment guide: https://www.twingate.com/docs/proxmox-container-deployment
+2. Create a connector in Twingate dashboard pointed at the LXC
+3. Deploy and verify connection
+
+---
+
+### 5. Pi-hole
+
+1. Create LXC with static IP
+2. Run interactive installer: `curl -sSL https://install.pi-hole.net | bash`
+3. Configure via Web UI
+
+---
+
+### 6. Docker Host VMs
+
+Create a VM for each additional Docker host service...
