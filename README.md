@@ -72,4 +72,11 @@ sudo apt install caddy
 
 ### 6. Docker Host VMs
 
-Create a VM for each additional Docker host service...
+Create a VM for each additional Docker host service:
+  - Grafana
+  - *arr stack
+  - jellyfin
+
+### 7. Grafana Stack
+
+1. 
