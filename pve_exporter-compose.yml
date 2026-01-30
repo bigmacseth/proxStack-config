@@ -1,0 +1,11 @@
+services:
+  prometheus-pve-exporter:
+    image: prompve/prometheus-pve-exporter
+    container_name: prometheus-pve-exporter
+    restart: unless-stopped
+    init: true
+    ports:
+      - "0.0.0.0:9221:9221"
+    volumes:
+      - ~/pve_exporter/conf/pve.yml:/etc/prometheus/pve.yml:ro
+      # ^ this might need to be changed to /home/$USER/pve_exporter/conf/pve.yml:/etc/prometheus/pve.yml
