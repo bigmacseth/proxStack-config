@@ -47,7 +47,6 @@ Static leases managed via OPNsense. All services hosted as LXC containers or VMs
 
 | IP            | Hostname        | Type | Services                                  |
 |---------------|-----------------|------|-------------------------------------------|
-| 172.0.0.10    | *(stale lease)* | —    | No longer in use — can be removed         |
 | 172.0.0.50    | seth            | PC   | Gaming PC                                 |
 | 172.0.0.51    | docker-grafana  | VM   | Grafana, Prometheus, Loki, pve_exporter   |
 | 172.0.0.53    | ubuntu-arr      | VM   | *arr stack (Sonarr, Radarr, Lidarr, Prowlarr, qBittorrent/Gluetun, FlareSolverr) |
@@ -56,11 +55,4 @@ Static leases managed via OPNsense. All services hosted as LXC containers or VMs
 | 172.0.0.57    | lxc-caddy       | LXC  | Caddy reverse proxy                       |
 | 172.0.0.58    | lxc-rustdesk    | LXC  | RustDesk relay/rendezvous server          |
 | 172.0.0.59    | lxc-pihole      | LXC  | Pi-hole DNS ad blocker                    |
-| 172.0.0.60    | lxc-upsnap      | LXC  | UpSnap wake-on-LAN manager               |
-
-## Stale Leases to Clean Up
-
-The following OPNsense leases are no longer accurate and should be removed:
-
-- **172.0.0.10** — old Pi-hole entry, Pi-hole is now at 172.0.0.59
-- **172.0.0.53** — was mislabeled as `jellyfin`, is actually the *arr stack (`ubuntu-arr`)
+| 172.0.0.60    | lxc-upsnap      | LXC  | UpSnap wake-on-LAN manager                |
