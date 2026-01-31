@@ -77,6 +77,8 @@ Create a VM for each additional Docker host service:
   - *arr stack
   - jellyfin
 
+---
+
 ### 7. Grafana Stack
 
 Use one vm (installed with ubuntu LTS) as a docker host, installing docker from this:
@@ -133,3 +135,9 @@ default:
     - caddy's job setup should look like "datasource: proxmox (or whatever you called your datasource)" "job: caddy" "Instance: 172.0.0.0:2019" "Interval: 10m"
     - proxmox's job setup should look  like "Instance: 172.0.0.3 (or whatever node you want to monitor, my first node is 172.0.0.3)
     - Done! (Loki logging coming soon)
+  
+---
+
+### Jellyfin VM
+
+1. 
