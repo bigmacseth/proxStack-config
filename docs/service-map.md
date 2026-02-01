@@ -45,7 +45,7 @@ All homelab services are hosted across a 3-node Proxmox cluster. Each service ru
 
 ## Docker Compose File Reference
 
-All compose files are stored in the root of the proxStack-config repo. This table maps each file to its host and service.
+All compose files are stored in the compose-files directory of the proxStack-config repo. This table maps each file to its host and service.
 
 | Compose File | Host | Service(s) |
 |--------------|------|------------|
