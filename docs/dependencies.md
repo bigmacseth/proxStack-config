@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document maps the relationships between services — what depends on what, and why. This is critical for recovery, because bringing services back up in the wrong order will result in broken functionality even if everything is technically running.
+This document maps the relationships between services. This is critical for recovery, because bringing services back up in the wrong order will result in broken functionality even if everything is technically running.
 
 ---
 
