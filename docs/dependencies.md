@@ -62,7 +62,7 @@ These can be brought up in any order, at any time. They don't rely on other inte
 
 **Host:** docker-grafana (prox2, 172.0.0.51)
 
-All components run as Docker containers on the same VM. Order matters here — Grafana is useless without its data sources.
+All components run as Docker containers on the same VM.
 
 | Order | Service | Depends On | Reason |
 |-------|---------|------------|--------|
@@ -77,8 +77,6 @@ All components run as Docker containers on the same VM. Order matters here — G
 
 **Host:** ubuntu-arr (prox1, 172.0.0.53)
 
-This is the most dependency-heavy stack. The chain flows from VPN -> downloads -> indexing -> individual *arr services -> frontend.
-
 | Order | Service | Depends On | Reason |
 |-------|---------|------------|--------|
 | 1 | Gluetun | — | VPN tunnel. Must be established before qBittorrent starts routing traffic. |
@@ -90,7 +88,7 @@ This is the most dependency-heavy stack. The chain flows from VPN -> downloads -
 | 5 | Lidarr | Prowlarr, qBittorrent | Music automation. Same dependency chain as Sonarr. |
 | 6 | Jellyseer | Jellyfin, Sonarr/Radarr/Lidarr | Request frontend. Needs Jellyfin to know what's already in the library, and at least one *arr service to submit requests to. |
 
-Note: Sonarr, Radarr, and Lidarr are all order 5 — they share the same dependencies but don't depend on each other. They can come up in any order or simultaneously.
+Note: Sonarr, Radarr, and Lidarr are all order 5. They can come up in any order or simultaneously.
 
 ---
 
